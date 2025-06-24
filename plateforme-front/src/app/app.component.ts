@@ -3,10 +3,21 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `
+    <div class="app-container">
+      <router-outlet></router-outlet>
+    </div>
+  `,
+  styles: [`
+    .app-container {
+      min-height: 100vh;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+  `]
 })
 export class AppComponent {
-  title = 'plateforme-front';
+  title = 'mon-rdv-app';
 }
