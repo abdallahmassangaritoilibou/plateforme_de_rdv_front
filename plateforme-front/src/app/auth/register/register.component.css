@@ -37,3 +37,9 @@
   background-color: #f44336 !important;
   color: white !important;
 }
+
+.centered {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
