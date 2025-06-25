@@ -1,0 +1,23 @@
+/* Centre la carte au milieu de l’écran */
+.login-card {
+  max-width: 400px;
+  margin: 4rem auto;      /* espace en haut + centrage horizontal */
+  padding: 1rem;          /* petit padding interne */
+}
+
+/* Tous les champs prennent 100% de la largeur de la carte */
+.full-width {
+  width: 100%;
+}
+
+/* Optionnel : style rapide pour le titre */
+mat-card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.mt-2 a {
+  color: #3f51b5;
+  text-decoration: none;
+}

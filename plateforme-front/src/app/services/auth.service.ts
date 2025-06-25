@@ -4,12 +4,18 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
+
 export interface RegisterPayload {
   forename: string;
   surname: string;
   email: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface LoginPayload {
+  email: string;
+  password: string;
 }
 
 export interface User {
@@ -25,6 +31,8 @@ export interface User {
 export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/users`;
 
+  private readonly loginUrl = `${environment.apiUrl}/auth/login`;
+  
   constructor(private readonly http: HttpClient) {}
 
   register(payload: RegisterPayload): Observable<User> {
@@ -34,7 +42,16 @@ export class AuthService {
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
+    login(payload: LoginPayload): Observable<string> {
+        return this.http.post(this.loginUrl, payload,{
+        responseType: 'text' as const})
+        .pipe( 
+            catchError(this.handleError)
+        );
+        
+    }
+  // Gestion centralisée des erreurs
+    private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Une erreur est survenue';
     
     if (error.error) {
