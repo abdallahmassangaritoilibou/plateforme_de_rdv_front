@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 
@@ -24,6 +24,12 @@ export interface User {
   surname: string;
   email: string;
 }
+export interface UserResponse {
+    id: number;
+    forename: string;
+    surname: string;
+    email: string;
+}
 
 @Injectable({ 
   providedIn: 'root' 
@@ -42,15 +48,26 @@ export class AuthService {
       );
   }
 
-    login(payload: LoginPayload): Observable<string> {
-        return this.http.post(this.loginUrl, payload,{
-        responseType: 'text' as const})
-        .pipe( 
-            catchError(this.handleError)
-        );
-        
-    }
-  // Gestion centralisée des erreurs
+    login(payload: LoginPayload): Observable<UserResponse> {
+    return this.http.post(this.loginUrl, payload, {
+      observe: 'response',
+      responseType: 'text'
+    })
+    .pipe(
+      map((resp: HttpResponse<string>) => {
+        const txt = resp.body ?? '';
+        try { 
+          return JSON.parse(txt) as UserResponse;
+        } catch {
+          throw new Error('Réponse invalide du serveur');
+        }
+      }),
+      
+    );
+  }
+ 
+ 
+    // Gestion centralisée des erreurs
     private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Une erreur est survenue';
     

@@ -1,0 +1,10 @@
+/* booking.component.css */
+.booking-card {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.slot-info {
+  flex: 1 1 auto;
+}

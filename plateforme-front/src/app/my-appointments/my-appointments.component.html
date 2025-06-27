@@ -1,0 +1,18 @@
+<mat-card class="my-appointments-card">
+  <mat-card-title>Mes rendez-vous</mat-card-title>
+
+  <ng-container *ngIf="appointments.length; else none">
+    <mat-list>
+      <mat-list-item *ngFor="let rdv of appointments">
+        <!-- utilisation de pipe date sur availability -->
+        {{ rdv.availability | date:'fullDate' }} à {{ rdv.availability | date:'shortTime' }}
+        — {{ rdv.status }}
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+  <ng-template #none>
+    <p>Vous n'avez aucun rendez-vous.</p>
+  </ng-template>
+   
+</mat-card>

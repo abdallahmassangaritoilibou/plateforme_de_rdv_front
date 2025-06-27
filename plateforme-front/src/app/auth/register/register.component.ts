@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AuthService, RegisterPayload } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -40,7 +41,8 @@ export class RegisterComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly auth: AuthService,
     private readonly snack: MatSnackBar,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly storage: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -85,7 +87,8 @@ export class RegisterComponent implements OnInit {
           duration: 4000,
           panelClass: ['success-snackbar']
         });
-        this.router.navigate(['/login']);
+        this.storage.set('userId', user.id.toString());
+        this.router.navigate(['/booking']);
       },
       error: (errorMessage: string) => {
         this.isLoading = false;
