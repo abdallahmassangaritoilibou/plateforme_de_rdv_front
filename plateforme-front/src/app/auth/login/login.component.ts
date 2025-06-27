@@ -3,12 +3,13 @@ import { Component, OnInit }           from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators }     from '@angular/forms';
 import { Router, RouterModule }                      from '@angular/router';
 import { MatSnackBar, MatSnackBarModule }                 from '@angular/material/snack-bar';
-import { AuthService, LoginPayload, }   from '../../services/auth.service';
+import { AuthService, LoginPayload, UserResponse }   from '../../services/auth.service';
 import { MatButtonModule }          from '@angular/material/button';
 import { MatCardModule }            from '@angular/material/card';
 import { MatFormFieldModule }       from '@angular/material/form-field';
 import { MatInputModule }            from '@angular/material/input';
 import { CommonModule }             from '@angular/common';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly auth: AuthService,
     private readonly snack: MatSnackBar,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly storage: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -49,15 +51,14 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     const payload = this.form.value  as LoginPayload;
     this.auth.login(payload).subscribe({
-      next: (message: string) => {
-        this.snack.open(message, '', { duration: 2000 });
-        if (message === 'Connexion réussie') {
-        // eventuellement stocker le user/token dans un service ou localStorage
+      next: (user: UserResponse) => {
+        this.storage.set('userId', user.id.toString());
+        this.snack.open(`Bienvenue ${user.forename}`, 'Fermer', { duration: 2000 });
         this.router.navigate(['/booking']);
-      }
+        
       },
-      error: (err: string) => {
-        this.snack.open(err, '', { duration: 4000 });
+      error: (message: string) => {
+        this.snack.open(message, 'Fermer', { duration: 4000 });
         this.isLoading = false;
       }
     });

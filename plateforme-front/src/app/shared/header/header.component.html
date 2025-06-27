@@ -2,9 +2,19 @@
 <header class="header">
   <div class="header-container">
     <span class="app-name">{{ appName}}</span>
-    <nav>
-      <a routerLink="/register">Inscription</a>
-      <a routerLink="/login">Connexion</a>
-    </nav>
-  </div>
+    <nav *ngIf="!isLoggedIn" class="nav-links">
+        <!-- Si pas connecté : Inscription & Connexion -->
+      <a mat-button routerLink="/register" class="nav-btn">Inscription</a>
+      <a mat-button routerLink="/login" class="nav-btn">Connexion</a>
+      </nav>
+        <!-- Si connecté : Mes rendez-vous & Déconnexion -->
+         <button
+        *ngIf="isLoggedIn"
+        mat-button
+        color="warn"
+        class="logout-button white-button"
+        (click)="logout()">
+        Déconnexion
+      </button>
+     </div>
 </header>

@@ -25,3 +25,18 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
+
+.nav-btn {
+  background-color: white !important;
+  color: #007bff !important; /* bleu Doctolib */
+  border: 1px solid #007bff !important; /* bordure bleu Doctolib */
+  border-radius: 20px;
+}
+
+.white-button {
+  width: 150px;
+  background-color: white !important;
+  color: #007bff !important; /* bleu Doctolib */
+  border: 1px solid #007bff !important; /* bordure bleu Doctolib */
+  border-radius: 20px;
+}
