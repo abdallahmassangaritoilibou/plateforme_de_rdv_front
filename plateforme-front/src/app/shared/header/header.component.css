@@ -37,6 +37,6 @@ nav a:hover {
   width: 150px;
   background-color: white !important;
   color: #007bff !important; /* bleu Doctolib */
-  border: 1px solid #007bff !important; /* bordure bleu Doctolib */
-  border-radius: 20px;
+  border: 5px solid #007bff !important; /* bordure bleu Doctolib */
+  border-radius: 17px;
 }
