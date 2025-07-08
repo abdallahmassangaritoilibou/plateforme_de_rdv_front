@@ -1,18 +1,37 @@
-<mat-card class="my-appointments-card">
-  <mat-card-title>Mes rendez-vous</mat-card-title>
+<div class="top-left-container"><button mat-button class="btRetourRésev" (click)="goToReservation()">
+  <- Retour à la réservation
+</button>
+</div>
+<mat-card class="booking-card">
+  <mat-card-title class="center-text">Mes rendez-vous</mat-card-title>
 
   <ng-container *ngIf="appointments.length; else none">
     <mat-list>
       <mat-list-item *ngFor="let rdv of appointments">
         <!-- utilisation de pipe date sur availability -->
-        {{ rdv.availability | date:'fullDate' }} à {{ rdv.availability | date:'shortTime' }}
-        — {{ rdv.status }}
+       <div class="slot-container">
+       <div class="slot-datetime">
+        <div class="slot-date">
+            {{ rdv.startTime | date:'EEEE dd MMMM yyyy' }}
+         
+         </div>
+         <div class="slot-time">
+            <span class="start-time">{{ rdv.startTime | date:'shortTime' }}</span>
+            <span class="end-time">– {{ rdv.endTime | date:'shortTime' }}</span> </div>
+         </div>
+            <div class="slot-action">
+         <button mat-button class="cancel-btn" (click)="cancel(rdv)">Annuler</button>
+        </div>
+        
+       </div>
       </mat-list-item>
     </mat-list>
+   
+
   </ng-container>
 
   <ng-template #none>
-    <p>Vous n'avez aucun rendez-vous.</p>
+    <p class="no-appointments">Vous n'avez aucun rendez-vous.</p>
   </ng-template>
    
 </mat-card>

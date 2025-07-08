@@ -1,8 +1,80 @@
 .booking-card {
-  max-width: 600px;
   margin: 2rem auto;
+  max-width: 600px;
   padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.center-text {
+  text-align: center;
+}
+
+.slot-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.slot-datetime {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+}
+mat-list-item {
+  margin-bottom: 1rem; /* espace entre chaque item */
+}
+
+
+.slot-date {
+  font-weight: 600;
+  color: #3f51b5;
+  margin-top:0.5rem;
+}
+
+.slot-status {
+  font-size: 0.85rem;
+  color: #555;
+  margin-left: 0.5rem;
+}
+
+.slot-time {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+
+
+.no-slots-message {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}
+
+.top-left-container {
+  display: flex;
+  justify-content: flex-start; /* aligne à gauche */
+  align-items: flex-start;     /* en haut */
+  padding: 20px;
+}
+
+
+.btRetourRésev{
+  padding: 10px 20px;
   border-radius: 8px;
-  background-color: #fff;
+}
+
+.cancel-btn {
+  background-color: #ff5252;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px; /* Plus arrondi partout */
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  line-height: 1.5; /* pour éviter que le texte soit collé */
+  margin-top: 10px;
 }

@@ -1,25 +1,37 @@
-<mat-card class="booking-card">
-  <mat-card-title>Choisissez un créneau</mat-card-title>
-
+<div class="top-right-container"><button mat-button class="btRDV" (click)="goToMyAppointments()">Voir mes rendez-vous -> </button>
+</div>
+<div class="center-text">
+  <mat-card-title >Choisissez un créneau qui vous convient</mat-card-title>
+</div>
+  <mat-card class="booking-card">
   <ng-container *ngIf="slots.length; else noSlots">
     <mat-list>
       <mat-list-item *ngFor="let slot of slots">
-        <div class="slot-info">
-          {{ slot.startTime | date:'short' }}
-          – {{ slot.endTime | date:'short' }}
+        <div class="slot-container">
+          <div class="slot-datetime">
+            <div class="slot-date">
+              {{ slot.startTime | date:'fullDate' }}
+            </div>
+            <div class="slot-time">
+              {{ slot.startTime | date:'shortTime' }} – {{ slot.endTime | date:'shortTime' }}
+            </div>
+          </div>
+
+          <div class="slot-action">
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="Loading"
+              (click)="reserve(slot)">
+              Réserver
+            </button>
+          </div>
         </div>
-        <button
-          mat-stroked-button
-          color="primary"
-          [disabled]="Loading"
-          (click)="reserve(slot)">
-          Réserver
-        </button>
       </mat-list-item>
     </mat-list>
   </ng-container>
 
   <ng-template #noSlots>
-    <p>Aucun créneau disponible pour le moment.</p>
+    <p class="no-slots-message">Aucun créneau disponible pour le moment.</p>
   </ng-template>
 </mat-card>

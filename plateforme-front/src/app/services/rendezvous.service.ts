@@ -5,13 +5,13 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { StorageService } from './storage.service';
 
-export interface RendezVous {
+
+export interface RendezVousDTO {
   id: number;
-  availability: number; // ID du créneau réservé
-  userId: number; // ID de l'utilisateur qui a réservé
-  dateCreation: string; // Date de création du RDV (ISO 8601)
-  status: string; // Statut du RDV (par exemple, "CONFIRMED", "CANCELED")
-  modificationdate: string; // Date de dernière modification du RDV (ISO 8601)
+  availabilityId: number 
+  startTime: string;
+  endTime: string; 
+  status: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -22,12 +22,22 @@ export class RendezVousService {
   private readonly http: HttpClient,
   private readonly storage: StorageService
 ) {}
-create(rdvDto: {user: { id: number }; availability: string; status: string; }) {
-  return this.http.post<RendezVous>(`${this.url}`, rdvDto);
+create(rdvDto: {userId: number; availabilityId: number; status: string; }) {
+  return this.http.post<RendezVousDTO>(`${this.url}`, rdvDto);
 }
 
-getMine(): Observable<RendezVous[]> {
+getMine(): Observable<RendezVousDTO[]> {
   const userId = this.storage.get('userId');
-  return this.http.get<RendezVous[]>(`${this.url}/user/${userId}`);
+  console.log('userId récupéré du storage:', userId); 
+  return this.http.get<RendezVousDTO[]>(`${this.url}/user/${userId}`);
 }
+
+cancelRdv(rdv: RendezVousDTO) {
+  const updated = {
+    ...rdv,
+    status: 'ANNULE'
+  };
+  return this.http.put(`${this.url}/${rdv.id}`, updated);
+}
+
 }

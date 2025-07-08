@@ -21,6 +21,7 @@ export class AvailabilityService {
   getAvailableSlots(): Observable<Availability[]> {
     return this.http.get<Availability[]>(`${this.url}/available`);
   }
-
+    updateIsBooked(id: number, booked: boolean) {
+    return this.http.patch(`${this.url}/${id}`, { isBooked:booked });
 }
-       
+}      
