@@ -1,0 +1,27 @@
+/* Fait en sorte que le body et html prennent toute la hauteur */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Assure que le body prend toute la hauteur de la fenêtre */
+}
+
+app-header {
+  flex-shrink: 0; /* Empêche le header de rétrécir */
+}
+
+/* Le contenu principal prend tout l'espace possible */
+main.main-content {
+  flex: 1; /* Permet au contenu de s'étendre pour remplir l'espace disponible */
+  
+}
+
+app-footer.app-footer {
+  margin-top: auto;
+}
