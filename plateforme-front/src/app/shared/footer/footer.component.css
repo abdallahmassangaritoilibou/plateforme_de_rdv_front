@@ -1,0 +1,8 @@
+/* src/app/shared/footer/footer.component.css */
+:host{
+    display:block;
+    margin-top: auto; /* Permet au footer de rester en bas de la page */
+    background-color: #f8f9fa; /* Couleur de fond claire */
+    padding: 1rem; /* Espacement interne */
+    text-align: center; /* Centrer le texte */
+}
